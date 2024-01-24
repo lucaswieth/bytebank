@@ -17,12 +17,12 @@ class VehicleFormState extends State<VehicleForm> {
   final TextEditingController _ctrlEngineField = TextEditingController();
 
   void _createNewVehicle(BuildContext context) {
-    final String year = _ctrlYearField.text;
+    final int? year = int.tryParse(_ctrlYearField.text);
     final String brand = _ctrlBrandField.text;
     final String model = _ctrlModelField.text;
     final String engine = _ctrlEngineField.text;
 
-    if (year != '' && brand != '' && model != '' && engine != '') {
+    if (year != null && brand != '' && model != '' && engine != '') {
       final Vehicle vehicle = Vehicle(year, brand, model, engine);
 
       /*ScaffoldMessenger.of(context).showSnackBar(

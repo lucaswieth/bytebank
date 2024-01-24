@@ -1,5 +1,5 @@
 class Vehicle {
-  final String year;
+  final int year;
   final String brand;
   final String model;
   final String engine;
