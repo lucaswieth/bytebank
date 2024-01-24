@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'form.dart';
-import 'vehicle.dart';
+import 'package:bytebank/screens/form.dart';
+import 'package:bytebank/models/vehicle.dart';
 
 class VehiclesList extends StatefulWidget {
   final List<Vehicle> _vehicles = [];
@@ -20,16 +20,22 @@ class VehiclesListState extends State<VehiclesList> {
         backgroundColor: Colors.orange,
       ),
       body: ListView.builder(
-          itemCount: widget._vehicles.length,
-          itemBuilder: (context, index) {
-            final vehicle = widget._vehicles[index];
-            return VehicleCard(vehicle);
-          }),
+        itemCount: widget._vehicles.length,
+        itemBuilder: (context, index) {
+          final vehicle = widget._vehicles[index];
+          return VehicleCard(vehicle);
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return FormVehicle();
-          }));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return FormVehicle();
+              },
+            ),
+          );
         },
         backgroundColor: Colors.orange,
         child: const Icon(Icons.time_to_leave),

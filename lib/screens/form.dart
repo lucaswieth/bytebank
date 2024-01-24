@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'vehicle.dart';
-import 'cards.dart';
-//form
+import 'package:bytebank/components/form_item.dart';
+import 'package:bytebank/screens/list.dart';
+import 'package:bytebank/models/vehicle.dart';
 
 class FormVehicle extends StatelessWidget {
   final TextEditingController _ctrlYearField = TextEditingController();
@@ -103,35 +103,5 @@ class FormVehicle extends StatelessWidget {
         backgroundColor: Colors.red,
       ));
     }
-  }
-}
-
-class FormItem extends StatelessWidget {
-  final TextEditingController controllerItem;
-  final String? labelItem;
-  final String? hintItem;
-  final IconData? iconItem;
-
-  //FormItem({super.key, required TextEditingController controllerItem});
-
-  FormItem(
-      {required this.controllerItem,
-      this.labelItem,
-      this.hintItem,
-      this.iconItem});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: TextField(
-        controller: controllerItem,
-        decoration: InputDecoration(
-          icon: Icon(iconItem),
-          labelText: labelItem,
-          hintText: hintItem,
-        ),
-      ),
-    );
   }
 }
