@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:bytebank/screens/list.dart';
 
 void main() {
-  runApp(GemaApp());
+  runApp(BytebankApp());
 }
 
-class GemaApp extends StatelessWidget {
-  const GemaApp({super.key});
+class BytebankApp extends StatelessWidget {
+  const BytebankApp({super.key});
 
   @override
   Widget build(BuildContext context) {

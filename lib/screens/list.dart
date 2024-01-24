@@ -28,19 +28,22 @@ class VehiclesListState extends State<VehiclesList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return FormVehicle();
-              },
-            ),
-          );
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return VehicleForm();
+          })).then((newVehicle) => _addNewVehicle(newVehicle));
         },
         backgroundColor: Colors.orange,
-        child: const Icon(Icons.time_to_leave),
+        child: const Icon(Icons.add),
       ),
     );
+  }
+
+  void _addNewVehicle(Vehicle newVehicle) {
+    if (newVehicle != null) {
+      setState(() {
+        widget._vehicles.add(newVehicle);
+      });
+    }
   }
 }
 

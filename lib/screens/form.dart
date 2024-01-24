@@ -3,13 +3,44 @@ import 'package:bytebank/components/form_item.dart';
 import 'package:bytebank/screens/list.dart';
 import 'package:bytebank/models/vehicle.dart';
 
-class FormVehicle extends StatelessWidget {
+class VehicleForm extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return VehicleFormState();
+  }
+}
+
+class VehicleFormState extends State<VehicleForm> {
   final TextEditingController _ctrlYearField = TextEditingController();
   final TextEditingController _ctrlBrandField = TextEditingController();
   final TextEditingController _ctrlModelField = TextEditingController();
   final TextEditingController _ctrlEngineField = TextEditingController();
 
-  FormVehicle({super.key});
+  void _createNewVehicle(BuildContext context) {
+    final String year = _ctrlYearField.text;
+    final String brand = _ctrlBrandField.text;
+    final String model = _ctrlModelField.text;
+    final String engine = _ctrlEngineField.text;
+
+    if (year != '' && brand != '' && model != '' && engine != '') {
+      final Vehicle vehicle = Vehicle(year, brand, model, engine);
+      Navigator.pop(context, vehicle);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Veículo cadastrado'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Não foi possível cadastrar o veículo.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +80,7 @@ class FormVehicle extends StatelessWidget {
               ),
               ElevatedButton(
                 child: const Text('Confirmar'),
-                onPressed: () {
-                  saveVehicle(context);
-                },
+                onPressed: () => _createNewVehicle(context),
               ),
             ]),
           ),
@@ -59,49 +88,13 @@ class FormVehicle extends StatelessWidget {
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final Future future =
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return VehiclesList();
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return VehicleForm();
           }));
-          future.then((vehicle) {
-            debugPrint('then future');
-            debugPrint('$vehicle');
-          });
         },
         backgroundColor: Colors.orange,
         child: const Icon(Icons.list_alt_rounded),
       ),
     );
-  }
-
-  void saveVehicle(BuildContext context) {
-    try {
-      final int year = int.parse(_ctrlYearField.text);
-      final String brand = _ctrlBrandField.text;
-      final String model = _ctrlModelField.text;
-      final String engine = _ctrlEngineField.text;
-
-      final newVehicle = Vehicle(year, brand, model, engine);
-      debugPrint(newVehicle.brand);
-
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Veículo cadastrado'),
-        backgroundColor: Colors.orange,
-      ));
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return VehiclesList();
-          },
-        ),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Não foi possível cadastrar o veículo'),
-        backgroundColor: Colors.red,
-      ));
-    }
   }
 }
