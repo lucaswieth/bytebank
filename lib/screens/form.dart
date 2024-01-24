@@ -25,12 +25,12 @@ class VehicleFormState extends State<VehicleForm> {
     if (year != '' && brand != '' && model != '' && engine != '') {
       final Vehicle vehicle = Vehicle(year, brand, model, engine);
 
-      ScaffoldMessenger.of(context).showSnackBar(
+      /*ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Veículo cadastrado'),
           backgroundColor: Colors.orange,
         ),
-      );
+      );*/
 
       Navigator.pop(context, vehicle);
     } else {
