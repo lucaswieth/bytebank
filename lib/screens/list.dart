@@ -39,11 +39,9 @@ class VehiclesListState extends State<VehiclesList> {
   }
 
   void _addNewVehicle(Vehicle newVehicle) {
-    if (newVehicle != null) {
-      setState(() {
-        widget._vehicles.add(newVehicle);
-      });
-    }
+    setState(() {
+      widget._vehicles.add(newVehicle);
+    });
   }
 }
 
